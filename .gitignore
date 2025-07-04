@@ -23,10 +23,14 @@ yarn-error.log*
 
 # Environment variables
 .env
-.env.*
-*.env
+.env.local
+.env.development
+.env.test
 .env.deployment
 deploy-to-render.sh
+
+# Allow production env file (no secrets)
+!frontend/.env.production
 
 # IDE
 .idea/
