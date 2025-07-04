@@ -315,7 +315,9 @@ const NavbarComponent = () => {
 
   useEffect(() => {
     // Check if the backend server is running
-    fetch('/api/health')
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    console.log('API URL being used:', apiUrl); // Debug log
+    fetch(`${apiUrl}/api/health`)
       .then(response => response.json())
       .then(data => setServerStatus(data.status))
       .catch(() => setServerStatus('unavailable'));

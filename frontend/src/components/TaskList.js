@@ -52,7 +52,8 @@ import {
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_BASE = `${API_URL}/api`;
 
 const TaskList = () => {
   const { token, isAuthenticated } = useAuth();
@@ -84,7 +85,7 @@ const TaskList = () => {
     const fetchTasks = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${API_URL}/tasks`, {
+        const response = await axios.get(`${API_BASE}/tasks`, {
           headers: { 'x-auth-token': token }
         });
         setTasks(response.data);
@@ -111,7 +112,7 @@ const TaskList = () => {
 
     try {
       const response = await axios.post(
-        `${API_URL}/tasks`,
+        `${API_BASE}/tasks`,
         newTask,
         { headers: { 'x-auth-token': token } }
       );
@@ -153,7 +154,7 @@ const TaskList = () => {
   const saveEdit = async (taskId) => {
     try {
       const response = await axios.put(
-        `${API_URL}/tasks/${taskId}`,
+        `${API_BASE}/tasks/${taskId}`,
         editTask,
         { headers: { 'x-auth-token': token } }
       );
@@ -186,7 +187,7 @@ const TaskList = () => {
   const handleToggleComplete = async (taskId, completed) => {
     try {
       const response = await axios.patch(
-        `${API_URL}/tasks/${taskId}`,
+        `${API_BASE}/tasks/${taskId}`,
         { completed },
         { headers: { 'x-auth-token': token } }
       );

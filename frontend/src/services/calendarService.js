@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_BASE = `${API_URL}/api`;
 
 // Get calendar sync status
 export const getCalendarStatus = async (token) => {
   try {
-    const response = await axios.get(`${API_URL}/calendar/sync-status`, {
+    const response = await axios.get(`${API_BASE}/calendar/sync-status`, {
       headers: { 'x-auth-token': token }
     });
     return response.data;
@@ -19,7 +20,7 @@ export const getCalendarStatus = async (token) => {
 export const toggleCalendarSync = async (token, enable) => {
   try {
     const response = await axios.post(
-      `${API_URL}/calendar/toggle-sync`,
+      `${API_BASE}/calendar/toggle-sync`,
       { enable },
       { headers: { 'x-auth-token': token } }
     );
@@ -33,7 +34,7 @@ export const toggleCalendarSync = async (token, enable) => {
 // Get calendar events
 export const getCalendarEvents = async (token, params = {}) => {
   try {
-    const response = await axios.get(`${API_URL}/calendar/events`, {
+    const response = await axios.get(`${API_BASE}/calendar/events`, {
       headers: { 'x-auth-token': token },
       params
     });
@@ -48,7 +49,7 @@ export const getCalendarEvents = async (token, params = {}) => {
 export const createCalendarEvent = async (token, eventData) => {
   try {
     const response = await axios.post(
-      `${API_URL}/calendar/events`,
+      `${API_BASE}/calendar/events`,
       eventData,
       { headers: { 'x-auth-token': token } }
     );
@@ -63,7 +64,7 @@ export const createCalendarEvent = async (token, eventData) => {
 export const updateCalendarEvent = async (token, eventId, eventData) => {
   try {
     const response = await axios.put(
-      `${API_URL}/calendar/events/${eventId}`,
+      `${API_BASE}/calendar/events/${eventId}`,
       eventData,
       { headers: { 'x-auth-token': token } }
     );
@@ -77,7 +78,7 @@ export const updateCalendarEvent = async (token, eventId, eventData) => {
 // Delete calendar event
 export const deleteCalendarEvent = async (token, eventId) => {
   try {
-    await axios.delete(`${API_URL}/calendar/events/${eventId}`, {
+    await axios.delete(`${API_BASE}/calendar/events/${eventId}`, {
       headers: { 'x-auth-token': token }
     });
     return true;
