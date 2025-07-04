@@ -23,6 +23,10 @@ yarn-error.log*
 
 # Environment variables
 .env
+.env.*
+*.env
+.env.deployment
+deploy-to-render.sh
 
 # IDE
 .idea/
